@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.4
+    container_name: technical-test-mysql-container
+    env_file:
+      - .env
+    ports:
+      - "33066:3306"
+    networks:
+      - technical-test-network
+    volumes:
+      - mysql-volume:/var/lib/mysql
+  api:
+    image: technical-test-api-image
+    container_name: technical-test-api-container
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - technical-test-network
+    depends_on:
+      - db
+    restart: on-failure
+
+networks:
+  technical-test-network:
+
+volumes:
+  mysql-volume:
