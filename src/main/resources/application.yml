@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: technical-test
+  datasource:
+    url: jdbc:mysql://technical-test-mysql-container:${MYSQL_PORT}/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQLDialect
